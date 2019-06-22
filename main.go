@@ -6,14 +6,30 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"os"
 	"strings"
 )
 
 func main() {
 	target := "https://notify-api.line.me/api/notify"
-	token := "access token" //<> invalid
+	token := "token" //<> invalid
 
-	msg := "약드셈"
+	var msg string
+
+	firstUserMsg := "user1 약드셈"
+	secondUserMsg := "user2 약드셈"
+
+	arg := strings.Join(os.Args[1:2], "")
+
+	fmt.Println(arg)
+
+	if arg == "user1" {
+		msg = firstUserMsg
+	} else if arg == "user2" {
+		msg = secondUserMsg
+	} else {
+		panic("invalid bald's name")
+	}
 
 	u, err := url.ParseRequestURI(target)
 	if err != nil {
